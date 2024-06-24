@@ -26,13 +26,10 @@
       "unique": true,
       "min": "1"
     },
-    "icono": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

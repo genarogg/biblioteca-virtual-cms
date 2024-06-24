@@ -51,10 +51,6 @@
       "default": true,
       "required": false
     },
-    "aprobado": {
-      "type": "boolean",
-      "default": false
-    },
     "categoria": {
       "type": "relation",
       "relation": "oneToOne",
