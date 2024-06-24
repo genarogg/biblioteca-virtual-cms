@@ -49,7 +49,7 @@
     "downloader": {
       "type": "boolean",
       "default": true,
-      "required": true
+      "required": false
     },
     "aprobado": {
       "type": "boolean",

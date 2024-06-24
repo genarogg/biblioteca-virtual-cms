@@ -424,9 +424,7 @@ export interface ApiTrabajoTrabajo extends Schema.CollectionType {
     emailAutor: Attribute.Email & Attribute.Required;
     cedulaAutor: Attribute.BigInteger & Attribute.Required;
     PDF: Attribute.Media<'files'>;
-    downloader: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
+    downloader: Attribute.Boolean & Attribute.DefaultTo<true>;
     aprobado: Attribute.Boolean & Attribute.DefaultTo<false>;
     categoria: Attribute.Relation<
       'api::trabajo.trabajo',
