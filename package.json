@@ -23,6 +23,7 @@
     "react-router-dom": "5.3.4",
     "strapi-plugin-custom-api": "^1.0.5",
     "strapi-plugin-entity-relationship-chart": "^4.14.6",
+    "strapi-plugin-strapi-algolia": "^1.7.1",
     "styled-components": "5.3.3"
   },
   "author": {
