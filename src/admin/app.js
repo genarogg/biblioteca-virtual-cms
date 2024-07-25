@@ -5,6 +5,7 @@ const config = {
       // 'cs',
       // 'de',
       // 'dk',
+      // 'en
        'es',
       // 'he',
       // 'id',
@@ -27,10 +28,10 @@ const config = {
       // 'zh-Hans',
       // 'zh',
     ],
+    defaultLocale: 'es', // Establecer español como idioma por defecto
   };
   
   const bootstrap = (app) => {
-    console.log("Hola mundo")
     console.log(app);
   };
   
