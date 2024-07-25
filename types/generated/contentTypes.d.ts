@@ -362,6 +362,92 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoriaCategoria extends Schema.CollectionType {
+  collectionName: 'categorias';
+  info: {
+    singularName: 'categoria';
+    pluralName: 'categorias';
+    displayName: 'categoria';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String;
+    color: Attribute.String &
+      Attribute.Required &
+      Attribute.CustomField<'plugin::color-picker.color'>;
+    posicion: Attribute.BigInteger &
+      Attribute.Unique &
+      Attribute.SetMinMax<
+        {
+          min: '1';
+        },
+        string
+      >;
+    url: Attribute.String & Attribute.Required & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTrabajoTrabajo extends Schema.CollectionType {
+  collectionName: 'trabajos';
+  info: {
+    singularName: 'trabajo';
+    pluralName: 'trabajos';
+    displayName: 'Trabajo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titulo: Attribute.String & Attribute.Required & Attribute.Unique;
+    descripcion: Attribute.Blocks & Attribute.Required;
+    nombreAutor: Attribute.String & Attribute.Required;
+    apellidoAutor: Attribute.String & Attribute.Required;
+    emailAutor: Attribute.Email & Attribute.Required;
+    cedulaAutor: Attribute.BigInteger & Attribute.Required;
+    PDF: Attribute.Media<'files'>;
+    downloader: Attribute.Boolean & Attribute.DefaultTo<true>;
+    categoria: Attribute.Relation<
+      'api::trabajo.trabajo',
+      'oneToOne',
+      'api::categoria.categoria'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::trabajo.trabajo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::trabajo.trabajo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -788,92 +874,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoriaCategoria extends Schema.CollectionType {
-  collectionName: 'categorias';
-  info: {
-    singularName: 'categoria';
-    pluralName: 'categorias';
-    displayName: 'categoria';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nombre: Attribute.String;
-    color: Attribute.String &
-      Attribute.Required &
-      Attribute.CustomField<'plugin::color-picker.color'>;
-    posicion: Attribute.BigInteger &
-      Attribute.Unique &
-      Attribute.SetMinMax<
-        {
-          min: '1';
-        },
-        string
-      >;
-    url: Attribute.String & Attribute.Required & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::categoria.categoria',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::categoria.categoria',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTrabajoTrabajo extends Schema.CollectionType {
-  collectionName: 'trabajos';
-  info: {
-    singularName: 'trabajo';
-    pluralName: 'trabajos';
-    displayName: 'Trabajo';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    titulo: Attribute.String & Attribute.Required & Attribute.Unique;
-    descripcion: Attribute.Blocks & Attribute.Required;
-    nombreAutor: Attribute.String & Attribute.Required;
-    apellidoAutor: Attribute.String & Attribute.Required;
-    emailAutor: Attribute.Email & Attribute.Required;
-    cedulaAutor: Attribute.BigInteger & Attribute.Required;
-    PDF: Attribute.Media<'files'>;
-    downloader: Attribute.Boolean & Attribute.DefaultTo<true>;
-    categoria: Attribute.Relation<
-      'api::trabajo.trabajo',
-      'oneToOne',
-      'api::categoria.categoria'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::trabajo.trabajo',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::trabajo.trabajo',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -884,6 +884,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::trabajo.trabajo': ApiTrabajoTrabajo;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -892,8 +894,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::categoria.categoria': ApiCategoriaCategoria;
-      'api::trabajo.trabajo': ApiTrabajoTrabajo;
     }
   }
 }

@@ -30,6 +30,7 @@ const config = {
   };
   
   const bootstrap = (app) => {
+    console.log("Hola mundo")
     console.log(app);
   };
   
